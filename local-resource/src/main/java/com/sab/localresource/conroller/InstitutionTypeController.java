@@ -1,34 +1,42 @@
 package com.sab.localresource.conroller;
 
 
-import com.sab.localresource.request.MunicipalityRequest;
+import com.sab.localresource.model.InstitutionType;
+import com.sab.localresource.repository.InstitutionTypeRepository;
+import com.sab.localresource.request.InstitutionTypeRequest;
 import com.sab.localresource.response.CommonResponse;
-import com.sab.localresource.service.MunicipalityService;
+import com.sab.localresource.service.InstitutionTypeService;
 import com.sab.sabglobal.exception.GlobalException;
 import com.sab.sabglobal.model.CustomResponse;
 import com.sab.sabglobal.payload.response.Response;
 import com.sab.sabglobal.util.ResponseBuilder;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("resource")
-public class MunicipalityController {
+public class InstitutionTypeController {
 
     @Autowired
-    MunicipalityService municipalityService;
+    InstitutionTypeService institutionTypeService;
     @Autowired
-    ResponseBuilder<Response> responseBuilder;
+    ResponseBuilder responseBuilder;
 
-    @PostMapping("municipality")
-    public ResponseEntity<CustomResponse<Response>> addMunicipality(@RequestBody MunicipalityRequest request) throws GlobalException {
-        CommonResponse commonResponse = municipalityService.addMunicipality(request);
+    @PostMapping("institution-type")
+    public ResponseEntity<CustomResponse> addInstitutionType (@RequestBody @Valid InstitutionTypeRequest institutionTypeRequest ) throws GlobalException {
+
+        CommonResponse commonResponse =  institutionTypeService.saveInstitutionType(institutionTypeRequest);
         CustomResponse<Response> customResponse = new CustomResponse<>();
         customResponse.setResponse(Collections.singletonList(commonResponse));
         return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
+
     }
+
+
 }

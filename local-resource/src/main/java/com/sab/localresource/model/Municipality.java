@@ -2,6 +2,7 @@ package com.sab.localresource.model;
 
 import com.sab.localresource.request.MunicipalityRequest;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.security.PublicKey;
@@ -13,6 +14,7 @@ public class Municipality {
     @Id
     private String municipalityId;
     @Column(nullable = false, unique = true)
+    @Size(max = 250)
     private String municipalityName;
 
     public Municipality() {

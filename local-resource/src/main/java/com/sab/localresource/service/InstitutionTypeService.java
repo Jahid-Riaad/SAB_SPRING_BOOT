@@ -1,8 +1,8 @@
 package com.sab.localresource.service;
 
-import com.sab.localresource.model.Municipality;
-import com.sab.localresource.repository.MunicipalityRepository;
-import com.sab.localresource.request.MunicipalityRequest;
+import com.sab.localresource.model.InstitutionType;
+import com.sab.localresource.repository.InstitutionTypeRepository;
+import com.sab.localresource.request.InstitutionTypeRequest;
 import com.sab.localresource.response.CommonResponse;
 import com.sab.sabglobal.exception.ExceptionManager;
 import com.sab.sabglobal.exception.GlobalException;
@@ -13,22 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MunicipalityService {
-
+public class InstitutionTypeService {
     @Autowired
-    MunicipalityRepository municipalityRepository;
+    InstitutionTypeRepository institutionTypeRepository;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    public CommonResponse addMunicipality(MunicipalityRequest municipalityRequest) throws GlobalException {
+    public CommonResponse saveInstitutionType(InstitutionTypeRequest institutionTypeRequest) throws GlobalException {
         CommonResponse commonResponse = new CommonResponse();
         try {
-            Municipality municipality = new Municipality(municipalityRequest);
-            municipalityRepository.save(municipality);
+            InstitutionType institutionType = new InstitutionType(institutionTypeRequest);
+            institutionTypeRepository.save(institutionType);
             commonResponse.setResponseCode("0000000");
-            commonResponse.setResponseMessage("Municipality Saved.");
+            commonResponse.setResponseMessage("Institution Type Saved");
         } catch (Exception e) {
             logger.error("Error Track is:::-------", e.getMessage());
             ExceptionManager.throwGlobalException(GlobalConstant.SOMETHING_WRONG_ERROR_CODE, GlobalConstant.SOMETHING_WRONG_ERROR_MESSAGE, GlobalConstant.SOMETHING_WRONG_ERROR_TYPE);
         }
         return commonResponse;
+
     }
 }

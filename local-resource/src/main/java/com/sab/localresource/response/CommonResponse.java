@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MunicipalityResponse  implements Response {
+public class CommonResponse implements Response {
     private String responseCode;
     private String responseMessage;
 }
