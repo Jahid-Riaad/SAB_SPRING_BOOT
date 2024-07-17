@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MunicipalityRequest {
-    private String municipalityName;
+    private String municipality;
 }

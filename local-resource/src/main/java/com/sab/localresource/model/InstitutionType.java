@@ -10,27 +10,28 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class InstitutionType {
+public class InstitutionType implements Serializable {
     @Id
-    private String typeId;
+    private String id;
     @Column(nullable = false, unique = true)
     @Size(max = 250)
-    private String typeName;
+    private String name;
 
     public InstitutionType(InstitutionTypeRequest institutionTypeRequest) {
-        this.typeName = institutionTypeRequest.getInstitutionType();
+        this.name = institutionTypeRequest.getInstitutionType();
     }
 
     @PrePersist
     public void prePersist(){
-        if (this.typeId == null){
-            this.typeId = UUID.randomUUID().toString();
+        if (this.id == null){
+            this.id = UUID.randomUUID().toString();
         }
     }
 
