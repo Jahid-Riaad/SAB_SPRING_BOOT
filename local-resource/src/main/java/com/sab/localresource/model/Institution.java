@@ -1,6 +1,6 @@
 package com.sab.localresource.model;
 
-import com.sab.localresource.request.InstitutionRequest;
+import com.sab.localresource.request.InstitutionAddRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,8 +32,19 @@ public class Institution implements Serializable {
     @Column(name = "ADDRESS", length = 500)
     private String address;
 
-    public Institution(InstitutionRequest institutionRequest) {
-        this.name = institutionRequest.getInstitution();
+    public Institution(InstitutionAddRequest institutionAddRequest) {
+        this.name = institutionAddRequest.getName();
+        this.institutionType=institutionAddRequest.getInstitutionType();
+        this.municipality=institutionAddRequest.getMunicipality();
+        this.address=institutionAddRequest.getAddress();
+    }
+
+    public Institution(Institution institution) {
+        this.id = institution.getId();
+        this.name = institution.getName();
+        this.institutionType = institution.getInstitutionType();
+        this.municipality = institution.getMunicipality();
+        this.address = institution.getAddress();
     }
 
     @PrePersist

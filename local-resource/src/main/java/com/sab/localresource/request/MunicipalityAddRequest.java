@@ -7,6 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MunicipalityRequest {
-    private String municipality;
+public class MunicipalityAddRequest {
+    private String name;
 }

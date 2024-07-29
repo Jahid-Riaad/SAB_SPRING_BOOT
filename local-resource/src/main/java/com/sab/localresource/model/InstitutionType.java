@@ -1,6 +1,6 @@
 package com.sab.localresource.model;
 
-import com.sab.localresource.request.InstitutionTypeRequest;
+import com.sab.localresource.request.InstitutionTypeAddRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -24,8 +24,13 @@ public class InstitutionType implements Serializable {
     @Size(max = 250)
     private String name;
 
-    public InstitutionType(InstitutionTypeRequest institutionTypeRequest) {
-        this.name = institutionTypeRequest.getInstitutionType();
+    public InstitutionType(InstitutionTypeAddRequest institutionTypeAddRequest) {
+        this.name = institutionTypeAddRequest.getName();
+    }
+
+    public InstitutionType(InstitutionType institutionType) {
+        this.id = institutionType.id;
+        this.name = institutionType.name;
     }
 
     @PrePersist

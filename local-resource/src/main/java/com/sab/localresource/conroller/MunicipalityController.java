@@ -1,7 +1,8 @@
 package com.sab.localresource.conroller;
 
 
-import com.sab.localresource.request.MunicipalityRequest;
+import com.sab.localresource.model.Municipality;
+import com.sab.localresource.request.MunicipalityAddRequest;
 import com.sab.localresource.response.CommonResponse;
 import com.sab.localresource.service.MunicipalityService;
 import com.sab.sabglobal.exception.GlobalException;
@@ -25,8 +26,22 @@ public class MunicipalityController {
     ResponseBuilder<Response> responseBuilder;
 
     @PostMapping("municipality")
-    public ResponseEntity<CustomResponse<Response>> addMunicipality(@RequestBody MunicipalityRequest request) throws GlobalException {
+    public ResponseEntity<CustomResponse<Response>> addMunicipality(@RequestBody MunicipalityAddRequest request) throws GlobalException {
         CommonResponse commonResponse = municipalityService.addMunicipality(request);
+        CustomResponse<Response> customResponse = new CustomResponse<>();
+        customResponse.setResponse(Collections.singletonList(commonResponse));
+        return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
+    }
+    @PutMapping("municipality")
+    public ResponseEntity<CustomResponse<Response>> updateMunicipality(@RequestBody Municipality municipality ) throws GlobalException {
+        CommonResponse commonResponse = municipalityService.updateMunicipality(municipality);
+        CustomResponse<Response> customResponse = new CustomResponse<>();
+        customResponse.setResponse(Collections.singletonList(commonResponse));
+        return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
+    }
+    @DeleteMapping ("municipality")
+    public ResponseEntity<CustomResponse<Response>> deleteMunicipality(@RequestBody Municipality municipality ) throws GlobalException {
+        CommonResponse commonResponse = municipalityService.deleteMunicipality(municipality);
         CustomResponse<Response> customResponse = new CustomResponse<>();
         customResponse.setResponse(Collections.singletonList(commonResponse));
         return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));

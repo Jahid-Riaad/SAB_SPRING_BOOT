@@ -2,8 +2,7 @@ package com.sab.localresource.conroller;
 
 
 import com.sab.localresource.model.InstitutionType;
-import com.sab.localresource.repository.InstitutionTypeRepository;
-import com.sab.localresource.request.InstitutionTypeRequest;
+import com.sab.localresource.request.InstitutionTypeAddRequest;
 import com.sab.localresource.response.CommonResponse;
 import com.sab.localresource.service.InstitutionTypeService;
 import com.sab.sabglobal.exception.GlobalException;
@@ -29,14 +28,24 @@ public class InstitutionTypeController {
     ResponseBuilder responseBuilder;
 
     @PostMapping("institution-type")
-    public ResponseEntity<CustomResponse> addInstitutionType (@RequestBody @Valid InstitutionTypeRequest institutionTypeRequest ) throws GlobalException {
-
-        CommonResponse commonResponse =  institutionTypeService.saveInstitutionType(institutionTypeRequest);
+    public ResponseEntity<CustomResponse> addInstitutionType (@RequestBody @Valid InstitutionTypeAddRequest institutionTypeAddRequest) throws GlobalException {
+        CommonResponse commonResponse =  institutionTypeService.saveInstitutionType(institutionTypeAddRequest);
         CustomResponse<Response> customResponse = new CustomResponse<>();
         customResponse.setResponse(Collections.singletonList(commonResponse));
         return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
-
     }
-
-
+    @PutMapping ("institution-type")
+    public ResponseEntity<CustomResponse> updateInstitutionType (@RequestBody @Valid InstitutionType institutionType) throws GlobalException {
+        CommonResponse commonResponse =  institutionTypeService.updateInstitutionType(institutionType);
+        CustomResponse<Response> customResponse = new CustomResponse<>();
+        customResponse.setResponse(Collections.singletonList(commonResponse));
+        return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
+    }
+    @DeleteMapping ("institution-type")
+    public ResponseEntity<CustomResponse> deleteInstitutionType (@RequestBody @Valid InstitutionType institutionType) throws GlobalException {
+        CommonResponse commonResponse =  institutionTypeService.deleteInstitutionType(institutionType);
+        CustomResponse<Response> customResponse = new CustomResponse<>();
+        customResponse.setResponse(Collections.singletonList(commonResponse));
+        return ResponseEntity.ok().body(responseBuilder.buildResponse(customResponse));
+    }
 }

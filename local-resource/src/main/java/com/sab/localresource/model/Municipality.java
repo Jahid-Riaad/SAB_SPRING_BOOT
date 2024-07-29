@@ -1,8 +1,9 @@
 package com.sab.localresource.model;
 
-import com.sab.localresource.request.MunicipalityRequest;
+import com.sab.localresource.request.MunicipalityAddRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Data
 @Entity
+@AllArgsConstructor
 public class Municipality implements Serializable {
     @Id
     private String id;
@@ -19,10 +21,13 @@ public class Municipality implements Serializable {
 
     public Municipality() {
     }
-    public Municipality(MunicipalityRequest name) {
-        this.name = name.getMunicipality();
+    public Municipality(Municipality municipality) {
+        this.id = municipality.getId();
+        this.name = municipality.getName();
     }
-
+    public Municipality(MunicipalityAddRequest municipalityAddRequest) {
+        this.name = municipalityAddRequest.getName();
+    }
     @PrePersist
     public void prePersist(){
         if (this.id == null){
