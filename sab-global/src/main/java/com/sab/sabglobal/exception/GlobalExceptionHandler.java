@@ -47,6 +47,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    public static Throwable findRootCauseOfType(Throwable throwable, Class<?> type) {
+        Throwable current = throwable;
+        while (current != null) {
+            if (type.isInstance(current)) {
+                return current;
+            }
+            current = current.getCause();
+        }
+        return null;
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                   HttpHeaders headers, HttpStatusCode status, WebRequest request) {
@@ -78,20 +89,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({SQLException.class, DataIntegrityViolationException.class})
     public ResponseEntity<CustomResponse<CustomPayload>> handleSQLException(HttpServletRequest request, Exception ex) {
-        this.logger.info("GlobalExceptionHandler HttpServletRequest request :" + request);
+        this.logger.info("GlobalExceptionHandler HttpServletRequest request: " + request);
         this.logger.error("Error Track is:::-------", ex);
 
         CustomError error = new CustomError();
-        error.setCode(SOMETHING_WRONG_ERROR_CODE).setMessage(SOMETHING_WRONG_ERROR_MESSAGE)
-                .setType(SOMETHING_WRONG_ERROR_TYPE);
+        Throwable sqlExceptionRootCause = findRootCauseOfType(ex, SQLException.class);
+
+        if (sqlExceptionRootCause != null && sqlExceptionRootCause instanceof SQLException) {
+            SQLException sqlEx = (SQLException) sqlExceptionRootCause;
+            if (sqlEx.getErrorCode() == 1) { // ORA-00001 error code
+                error.setCode(UNIQUE_CONSTRAINT_ERROR_CODE)
+                        .setMessage(UNIQUE_CONSTRAINT_ERROR_MESSAGE)
+                        .setType(UNIQUE_CONSTRAINT_ERROR_TYPE);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(this.responseBuilder.buildResponse(Collections.emptyList(), Collections.singletonList(error), false));
+            }
+        }
+
+        // Default case for unhandled exceptions
+        error.setCode(DATABASE_ERROR_CODE)
+                .setMessage(DATABASE_ERROR_MESSAGE)
+                .setType(DATABASE_ERROR_TYPE);
 
         List<CustomError> errors = new ArrayList<>();
         errors.add(error);
 
-        this.logger.error("There was an Error trying to read/write to the database:: SQL Exception");
+        this.logger.error("There was an error trying to read/write to the database: SQL Exception");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(this.responseBuilder.buildResponse(Collections.emptyList(), errors, false));
     }
+
 
     @ExceptionHandler({InvalidFormatException.class})
     public ResponseEntity<CustomResponse<CustomPayload>> handleInvalidFormatException(HttpServletRequest request, InvalidFormatException ex) {

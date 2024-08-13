@@ -9,15 +9,15 @@
         <outputRelativeToContentRoot value="true" />
         <module name="sab-global" />
         <module name="demo" />
-        <module name="local-resource" />
+        <module name="student" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="demo" options="-parameters" />
-      <module name="local-resource" options="-parameters" />
       <module name="sab-global" options="-parameters" />
+      <module name="student" options="-parameters" />
     </option>
   </component>
 </project>

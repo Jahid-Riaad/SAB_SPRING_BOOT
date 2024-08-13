@@ -133,5 +133,12 @@ public final class GlobalConstant {
     public static final String TOKEN_NOT_FOUND_ERROR_CODE = "ERR40101";
     public static final String TOKEN_NOT_FOUND_ERROR_MESSAGE = "Invalid Token";
     public static final String TOKEN_NOT_FOUND_ERROR_TYPE = HttpStatus.UNAUTHORIZED.getReasonPhrase();
+    public static final String UNIQUE_CONSTRAINT_ERROR_CODE = "ERR00001";
+    public static final String UNIQUE_CONSTRAINT_ERROR_MESSAGE = "The specified Entity already exists.";
+    public static final String UNIQUE_CONSTRAINT_ERROR_TYPE = HttpStatus.BAD_REQUEST.getReasonPhrase();
+
+    public static final String DATABASE_ERROR_CODE = "ERR12000";
+    public static final String DATABASE_ERROR_MESSAGE = "Database error";
+    public static final String DATABASE_ERROR_TYPE = HttpStatus.BAD_REQUEST.getReasonPhrase();
 
 }
