@@ -1,9 +1,10 @@
 package com.sab.student.conroller;
 
 
+import com.sab.sabglobal.model.CommonResponse;
+import com.sab.student.dto.InstitutionTypeDTO;
 import com.sab.student.model.InstitutionType;
 import com.sab.student.request.InstitutionTypeAddRequest;
-import com.sab.student.response.CommonResponse;
 import com.sab.student.service.InstitutionTypeService;
 import com.sab.sabglobal.exception.GlobalException;
 import com.sab.sabglobal.model.CustomResponse;
@@ -19,13 +20,19 @@ import java.util.Collections;
 
 @CrossOrigin
 @RestController
-@RequestMapping("resource")
+//@RequestMapping("resource")
 public class InstitutionTypeController {
 
     @Autowired
     InstitutionTypeService institutionTypeService;
     @Autowired
     ResponseBuilder responseBuilder;
+
+    @GetMapping("institution-type/{id}")
+    public ResponseEntity<InstitutionTypeDTO> getInstitutionTypeById (@PathVariable("id") String id){
+        InstitutionType institutionType = institutionTypeService.getInstitutionById(id);
+        return  ResponseEntity.ok().body(new InstitutionTypeDTO().convertToDTO(institutionType));
+    }
 
     @PostMapping("institution-type")
     public ResponseEntity<CustomResponse> addInstitutionType (@RequestBody @Valid InstitutionTypeAddRequest institutionTypeAddRequest) throws GlobalException {

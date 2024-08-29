@@ -1,9 +1,10 @@
 package com.sab.student.conroller;
 
 
+import com.sab.sabglobal.model.CommonResponse;
+import com.sab.student.dto.MunicipalityDTO;
 import com.sab.student.model.Municipality;
 import com.sab.student.request.MunicipalityAddRequest;
-import com.sab.student.response.CommonResponse;
 import com.sab.student.service.MunicipalityService;
 import com.sab.sabglobal.exception.GlobalException;
 import com.sab.sabglobal.model.CustomResponse;
@@ -17,13 +18,19 @@ import java.util.Collections;
 
 @CrossOrigin
 @RestController
-@RequestMapping("resource")
+//@RequestMapping("resource")
 public class MunicipalityController {
 
     @Autowired
     MunicipalityService municipalityService;
     @Autowired
     ResponseBuilder<Response> responseBuilder;
+
+    @GetMapping("municipality/{id}")
+    public ResponseEntity<MunicipalityDTO> getMunicipalityById(@PathVariable("id") String id){
+        Municipality municipality = municipalityService.getMunicipalityById(id);
+        return ResponseEntity.ok().body(new MunicipalityDTO().convertToDTO(municipality));
+    }
 
     @PostMapping("municipality")
     public ResponseEntity<CustomResponse<Response>> addMunicipality(@RequestBody MunicipalityAddRequest request) throws GlobalException {

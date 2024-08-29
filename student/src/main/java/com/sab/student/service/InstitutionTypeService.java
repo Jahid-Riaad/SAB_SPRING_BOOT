@@ -1,10 +1,9 @@
 package com.sab.student.service;
 
+import com.sab.sabglobal.model.CommonResponse;
 import com.sab.student.model.InstitutionType;
 import com.sab.student.repository.InstitutionTypeRepository;
 import com.sab.student.request.InstitutionTypeAddRequest;
-import com.sab.student.response.CommonResponse;
-import com.sab.sabglobal.exception.GlobalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +37,16 @@ public class InstitutionTypeService {
     }
 
     @Transactional
-    public CommonResponse deleteInstitutionType(InstitutionType institutionType){
+    public CommonResponse deleteInstitutionType(InstitutionType institutionType) {
 
         institutionTypeRepository.delete(institutionType);
         CommonResponse commonResponse = new CommonResponse();
         commonResponse.setResponseCode("0000000");
         commonResponse.setResponseMessage("Institution Type Deleted");
         return commonResponse;
+    }
+
+    public InstitutionType getInstitutionById(String id) {
+        return institutionTypeRepository.findById(id).orElse(null);
     }
 }

@@ -40,14 +40,12 @@ public class ResponseBuilder<T> {
         }
     }
 
-    public CustomResponse<T> buildResponse(List<T> payload, List<CustomError> errors,
-                                           boolean success) {
+    public CustomResponse<T> buildResponse(List<T> payload, List<CustomError> errors, boolean success) {
 
         CustomResponse<T> response = new CustomResponse<>();
         response.setErrors(errors);
         response.setResponse(payload);
         response.setTimeStamp(LocalDateTime.now().toString());
-
         response.setSuccess(success);
 
         return response;

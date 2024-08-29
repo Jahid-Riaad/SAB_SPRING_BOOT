@@ -1,8 +1,10 @@
 package com.sab.student.conroller;
 
+import com.sab.sabglobal.exception.GlobalException;
+import com.sab.sabglobal.model.CommonResponse;
+import com.sab.student.dto.StudentDTO;
 import com.sab.student.model.Student;
 import com.sab.student.request.StudentAddRequest;
-import com.sab.student.response.CommonResponse;
 import com.sab.student.service.StudentService;
 import com.sab.sabglobal.model.CustomResponse;
 import com.sab.sabglobal.payload.response.Response;
@@ -12,9 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @RestController
-@RequestMapping("resource")
+//@RequestMapping("resource")
 public class StudentController {
 
     @Autowired
@@ -22,6 +25,18 @@ public class StudentController {
 
     @Autowired
     ResponseBuilder responseBuilder;
+
+    @GetMapping("student/{id}")
+    public ResponseEntity<StudentDTO> getStudentById(@PathVariable("id") String id) {
+        Student student = studentService.getStudentById(id);
+        return ResponseEntity.ok().body(studentService.convertToDTO(student));
+    }
+
+    @PostMapping ("check-student")
+    public List<StudentDTO> checkStudentExistence(@RequestBody StudentDTO studentDTO) throws GlobalException {
+        System.out.println("Inside checkStudentExistence");
+        return studentService.existsStudent(studentDTO);
+    }
 
     @PostMapping("student")
     public ResponseEntity<CustomResponse<Response>> addStudent(@RequestBody StudentAddRequest studentAddRequest) {

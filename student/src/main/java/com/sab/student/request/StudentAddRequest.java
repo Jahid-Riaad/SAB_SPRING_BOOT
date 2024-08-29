@@ -17,7 +17,7 @@ public class StudentAddRequest {
     private Section section;
     private ExamSession examSession;
     private Date dateOfBirth;
-    private ComplainantRelationship complainantRelationship;
+    private Relationship guardianRelationship;
     private String guardianOtherRelationName;
     private String guardianName;
     private String guardianContact;

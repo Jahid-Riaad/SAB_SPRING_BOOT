@@ -1,5 +1,6 @@
 package com.sab.student.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sab.student.request.InstitutionAddRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,10 +24,12 @@ public class Institution implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private InstitutionType institutionType;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn( referencedColumnName = "id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Municipality municipality;
 
     @Column(name = "ADDRESS", length = 500)

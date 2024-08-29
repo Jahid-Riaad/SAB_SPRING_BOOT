@@ -44,7 +44,7 @@ public class Student {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "id")
-    private ComplainantRelationship complainantRelationship;
+    private Relationship guardianRelationship;
 
     private String guardianOtherRelationName;
     private String guardianName;
@@ -67,7 +67,7 @@ public class Student {
         this.section = studentAddRequest.getSection();
         this.examSession = studentAddRequest.getExamSession();
         this.dateOfBirth = studentAddRequest.getDateOfBirth();
-        this.complainantRelationship = studentAddRequest.getComplainantRelationship();
+        this.guardianRelationship = studentAddRequest.getGuardianRelationship();
         this.guardianOtherRelationName = studentAddRequest.getGuardianOtherRelationName();
         this.guardianName = studentAddRequest.getGuardianName();
         this.guardianContact = studentAddRequest.getGuardianContact();

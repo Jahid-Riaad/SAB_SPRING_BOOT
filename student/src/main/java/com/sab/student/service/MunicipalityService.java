@@ -1,9 +1,9 @@
 package com.sab.student.service;
 
+import com.sab.sabglobal.model.CommonResponse;
 import com.sab.student.model.Municipality;
 import com.sab.student.repository.MunicipalityRepository;
 import com.sab.student.request.MunicipalityAddRequest;
-import com.sab.student.response.CommonResponse;
 import com.sab.sabglobal.exception.ExceptionManager;
 import com.sab.sabglobal.exception.GlobalException;
 import com.sab.sabglobal.util.GlobalConstant;
@@ -51,5 +51,9 @@ public class MunicipalityService {
             ExceptionManager.throwGlobalException(GlobalConstant.SOMETHING_WRONG_ERROR_CODE, GlobalConstant.SOMETHING_WRONG_ERROR_MESSAGE, GlobalConstant.SOMETHING_WRONG_ERROR_TYPE);
         }
         return commonResponse;
+    }
+
+    public Municipality getMunicipalityById(String id) {
+        return municipalityRepository.findById(id).orElse(null);
     }
 }
