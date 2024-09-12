@@ -11,6 +11,7 @@
         <module name="sab-global" />
         <module name="student" />
         <module name="complaint" />
+        <module name="sab-security" />
         <module name="service-registry" />
       </profile>
     </annotationProcessing>
@@ -26,6 +27,7 @@
       <module name="demo" options="-parameters" />
       <module name="geoInst" options="-parameters" />
       <module name="sab-global" options="-parameters" />
+      <module name="sab-security" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="student" options="-parameters" />
     </option>

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.sab</groupId>
-    <artifactId>complaint</artifactId>
+    <artifactId>sab-security</artifactId>
     <version>0.0.0.1</version>
-    <name>complaint</name>
-    <description>SAB complaint Service</description>
+    <name>sab-security</name>
+    <description>SAB Security Service</description>
     <url/>
     <licenses>
         <license/>
@@ -37,21 +37,18 @@
             <version>0.0.0.1</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.sab</groupId>
-            <artifactId>student</artifactId>
-            <version>0.0.0.1</version>
-            <scope>compile</scope>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-crypto</artifactId>
         </dependency>
     </dependencies>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -79,4 +76,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
