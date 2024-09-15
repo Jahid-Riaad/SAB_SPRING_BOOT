@@ -1,3 +1,6 @@
+spring:
+  application:
+    name: sab-security
 eureka:
   client:
     service-url:

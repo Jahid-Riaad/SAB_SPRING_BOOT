@@ -11,7 +11,6 @@ import com.sab.sabglobal.util.GlobalConstant;
 import com.sab.complaint.feignClient.StudentHubClient;
 import com.sab.sabglobal.exception.GlobalException;
 import com.sab.sabglobal.model.CommonResponse;
-import com.sab.student.dto.StudentDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,17 +146,17 @@ public class ComplaintService {
                 result = false;
             }
 
-            ResponseEntity<StudentDTO> studentResponse = studentHubClient.getStudentById(complaintDTO.getStudentId());
+            ResponseEntity<Student> studentResponse = studentHubClient.getStudentById(complaintDTO.getStudentId());
             if (!studentResponse.getStatusCode().is2xxSuccessful() || studentResponse.getBody() == null) {
                 commonResponse.setResponseCode("0000001");
                 commonResponse.setResponseMessage("Invalid Student Id!");
                 return false;
             }
 
-            StudentDTO studentDTO = studentResponse.getBody();
-            System.out.println("After setting the StudentDTO: " + studentDTO);
+            Student Student = studentResponse.getBody();
+            System.out.println("After setting the Student: " + Student);
 
-            List<StudentDTO> studentList = studentHubClient.checkStudentExistence(studentDTO);
+            List<Student> studentList = studentHubClient.checkStudentExistence(Student);
 
             if (studentList.isEmpty()) {
                 commonResponse.setResponseCode("0000001");

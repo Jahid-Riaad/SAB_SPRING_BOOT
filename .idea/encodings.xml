@@ -8,7 +8,10 @@
     <file url="file://$PROJECT_DIR$/geoInst/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sab-global/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sab-global/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sab-security-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sab-security-common/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/sab-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sab-user/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-registry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/service-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/student/src/main/java" charset="UTF-8" />

@@ -7,17 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
-        <module name="sab-global" />
         <module name="student" />
         <module name="complaint" />
-        <module name="sab-security" />
+        <module name="sab-security-common" />
+        <module name="api-gateway" />
+        <module name="sab-global" />
         <module name="service-registry" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="17" />
       <module name="geoInst" target="17" />
+      <module name="sab-security" target="17" />
+      <module name="sab-user" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -28,6 +30,8 @@
       <module name="geoInst" options="-parameters" />
       <module name="sab-global" options="-parameters" />
       <module name="sab-security" options="-parameters" />
+      <module name="sab-security-common" options="-parameters" />
+      <module name="sab-user" options="-parameters" />
       <module name="service-registry" options="-parameters" />
       <module name="student" options="-parameters" />
     </option>

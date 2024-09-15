@@ -13,12 +13,15 @@
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/service-registry/pom.xml" />
         <option value="$PROJECT_DIR$/sab-security/pom.xml" />
+        <option value="$PROJECT_DIR$/sab-user/pom.xml" />
+        <option value="$PROJECT_DIR$/sab-security-common/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/demo/pom.xml" />
         <option value="$PROJECT_DIR$/geoInst/pom.xml" />
+        <option value="$PROJECT_DIR$/sab-user/pom.xml" />
       </set>
     </option>
   </component>
