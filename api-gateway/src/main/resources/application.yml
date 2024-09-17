@@ -1,4 +1,22 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+
+        - id: student-service
+          uri: lb://student-service
+          predicates:
+            - Path=/student/**
+          filters:
+            - JwtAuthFilter
+
+        - id: complaint-service
+          uri: lb://complaint-service
+          predicates:
+            - Path=/complaint/**
+          filters:
+            - JwtAuthFilter

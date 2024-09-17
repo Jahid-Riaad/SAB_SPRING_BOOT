@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/sab-security/pom.xml" />
         <option value="$PROJECT_DIR$/sab-user/pom.xml" />
         <option value="$PROJECT_DIR$/sab-security-common/pom.xml" />
+        <option value="$PROJECT_DIR$/user/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
