@@ -27,8 +27,9 @@ public class AuthenticationController {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         if (authentication.isAuthenticated()) {
-            return jwtTokenUtil.generateToken(authenticationRequest.getUsername());
+            return jwtTokenUtil.generateToken(userDetails);
         } else {
             throw new Exception("Incorrect username or password");
         }

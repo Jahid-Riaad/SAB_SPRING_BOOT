@@ -27,7 +27,7 @@ public class AuthConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(customizer -> customizer.disable())
                 .authorizeHttpRequests(authz -> authz.
-                        requestMatchers("/user/register", "/user/authenticate").permitAll()
+                        requestMatchers("register", "authenticate").permitAll()
                         .anyRequest().authenticated())
                 .build();
     }
@@ -49,4 +49,5 @@ public class AuthConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
 }
