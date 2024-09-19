@@ -1,4 +1,7 @@
+
 spring:
+  main:
+    web-application-type: reactive
   cloud:
     gateway:
       routes:
@@ -11,12 +14,12 @@ spring:
           uri: lb://student-service
           predicates:
             - Path=/student/**
-          filters:
-            - JwtAuthFilter
 
         - id: complaint-service
           uri: lb://complaint-service
           predicates:
             - Path=/complaint/**
-          filters:
-            - JwtAuthFilter
+
+jwt:
+  secret: bc534cbde41272352d1a97ae10f0af9ea0df6eeec7e3bbded9d8d5647837c361
+  expiration: 30

@@ -1,10 +1,14 @@
 package com.sab.apigateway.config;
 
+import com.sab.security.config.JwtAuthenticationFilter;
+import com.sab.security.config.SecurityConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 
 @Configuration
-@ComponentScan("com.sab.security")
+@ComponentScan(basePackages = "com.sab.security",
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = {SecurityConfig.class, JwtAuthenticationFilter.class}))
 public class SecurityBeanConfig {
 
 }
