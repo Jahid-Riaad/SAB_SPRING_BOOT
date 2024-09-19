@@ -1,5 +1,7 @@
 package com.sab.security.util;
 
+import java.util.List;
+
 public class UserDTO {
     private String username;
     private List<String> authorities;

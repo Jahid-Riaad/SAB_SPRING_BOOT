@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 
 @RestController
+@RequestMapping(value = "/api")
 public class ComplaintSubjectController {
     @Autowired
     ComplaintSubjectService complaintSubjectService;
@@ -20,13 +21,13 @@ public class ComplaintSubjectController {
     @Autowired
     ResponseBuilder responseBuilder;
 
-    @GetMapping("complaint-subject/{id}")
+    @GetMapping("/complaint-subject/{id}")
     public ResponseEntity<ComplaintSubject> getComplaintSubjectById(@PathVariable("id") String id) {
         ComplaintSubject complaintSubject = complaintSubjectService.getComplaintSubjectById(id);
         return ResponseEntity.ok().body(complaintSubject);
     }
 
-    @PostMapping("complaint-subject")
+    @PostMapping("/complaint-subject")
     public ResponseEntity<CustomResponse> addComplaintSubject(@RequestBody ComplaintSubjectRequest complaintSubjectRequest) {
         CommonResponse commonResponse = complaintSubjectService.addComplaintSubject(complaintSubjectRequest);
         CustomResponse customResponse= new CustomResponse<>();

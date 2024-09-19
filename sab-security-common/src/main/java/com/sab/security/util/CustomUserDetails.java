@@ -1,4 +1,4 @@
-package com.sab.user.security;
+package com.sab.security.util;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package com.sab.user.controller;
 
-import com.sab.security.util.JwtUtil;
+import com.sab.security.util.JwtTokenProvider;
 import com.sab.user.dto.AuthenticationRequest;
 import com.sab.user.service.SabUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +11,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "/auth")
 public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtUtil jwtTokenUtil;
+    private JwtTokenProvider jwtTokenUtil;
 
     @Autowired
     private SabUserDetailsService userDetailsService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/login")
     public String createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         Authentication authentication = authenticationManager.authenticate(

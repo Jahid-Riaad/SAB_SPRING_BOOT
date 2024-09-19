@@ -9,7 +9,6 @@ import com.sab.sabglobal.util.ResponseBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.constraints.NotNull;
-import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +69,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 fieldError.getField(), fieldError.getRejectedValue(), fieldError.getDefaultMessage());
 
         CustomError error = new CustomError();
-        if (ObjectUtils.isEmpty(fieldError.getRejectedValue())) {
+        if (fieldError.getRejectedValue() == null) {
             error.setCode(MANDATORY_FIELD_WARNING_CODE)
                     .setMessage(String.format("%s : %s", fieldError.getField(), fieldError.getDefaultMessage()))
                     .setType(MANDATORY_FIELD_WARNING_TYPE);
@@ -273,4 +272,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(this.responseBuilder.buildResponse(Collections.emptyList(), errors, false));
     }
+
 }

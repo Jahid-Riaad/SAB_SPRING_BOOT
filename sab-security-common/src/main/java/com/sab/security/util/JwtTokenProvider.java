@@ -14,11 +14,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-public class JwtUtil {
+public class JwtTokenProvider {
     @Value("${jwt.secret}")
+//    private String jwtSecret = "bc534cbde41272352d1a97ae10f0af9ea0df6eeec7e3bbded9d8d5647837c361";
     private String jwtSecret;
 
     @Value("${jwt.expiration}")
+//    private long jwtExpiration =86400000l;
     private long jwtExpiration;
 
     private Key getSigningKey() {
@@ -82,7 +84,7 @@ public class JwtUtil {
         return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token) {
+    public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
 
