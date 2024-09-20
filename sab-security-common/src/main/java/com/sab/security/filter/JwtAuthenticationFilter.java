@@ -1,8 +1,6 @@
-package com.sab.security.config;
+package com.sab.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sab.security.exception.JwtTokenExpiredException;
-import com.sab.security.util.CustomUserDetails;
 import com.sab.security.util.JwtTokenProvider;
 import com.sab.security.util.UserDTO;
 import jakarta.servlet.FilterChain;
@@ -14,8 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;

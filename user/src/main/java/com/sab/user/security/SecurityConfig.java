@@ -1,7 +1,6 @@
-package com.sab.user.config;
+package com.sab.user.security;
 
 import com.sab.security.filter.JwtAuthenticationFilter;
-import com.sab.user.service.SabUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

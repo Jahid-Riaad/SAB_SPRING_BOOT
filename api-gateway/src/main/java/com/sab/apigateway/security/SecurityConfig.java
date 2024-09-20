@@ -1,23 +1,16 @@
-package com.sab.apigateway.config;
+package com.sab.apigateway.security;
 
+import com.sab.apigateway.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.header.ReferrerPolicyServerHttpHeadersWriter;
-import org.springframework.security.web.server.header.XFrameOptionsServerHttpHeadersWriter;
-import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache;
-import org.springframework.security.web.server.util.matcher.NegatedServerWebExchangeMatcher;
-import org.springframework.security.web.server.util.matcher.OrServerWebExchangeMatcher;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers.pathMatchers;

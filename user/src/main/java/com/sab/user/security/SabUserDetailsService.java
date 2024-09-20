@@ -1,27 +1,24 @@
-package com.sab.user.service;
+package com.sab.user.security;
 
 import com.sab.user.entity.Authority;
 import com.sab.user.entity.UserPrincipal;
 import com.sab.user.entity.UserProfile;
 import com.sab.user.repository.AuthorityRepository;
 import com.sab.user.repository.UserProfileRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
-
 @Service
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 public class SabUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserProfileRepository userProfileRepository;
+    private final UserProfileRepository userProfileRepository;
 
-    @Autowired
-    private AuthorityRepository authorityRepository;
+    private final AuthorityRepository authorityRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

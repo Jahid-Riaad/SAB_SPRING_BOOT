@@ -1,5 +1,6 @@
 package com.sab.security.config;
 
+import com.sab.security.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +20,15 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+//@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private  MvcRequestMatcher.Builder mvc;
+
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, MvcRequestMatcher.Builder mvc) {
+        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
+        this.mvc = mvc;
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -38,12 +45,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter, MvcRequestMatcher.Builder mvc) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-//                                .requestMatchers(mvc.pattern("api/public/**")).permitAll()
+                                .requestMatchers(mvc.pattern("api/public/**")).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement ->

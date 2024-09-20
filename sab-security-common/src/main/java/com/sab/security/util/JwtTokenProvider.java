@@ -5,7 +5,10 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import java.security.Key;
@@ -86,6 +89,21 @@ public class JwtTokenProvider {
 
     public Boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
+    }
+
+    // Get Authentication object from token
+    public Authentication getAuthentication(String token) {
+        Claims claims = Jwts.parser()
+                .setSigningKey(jwtSecret)
+                .parseClaimsJws(token)
+                .getBody();
+
+        List<String> roles = claims.get("roles", List.class);
+        return new UsernamePasswordAuthenticationToken(
+                claims.getSubject(),
+                null,
+                roles.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList())
+        );
     }
 
 }
