@@ -20,7 +20,7 @@ import static org.springframework.security.web.server.util.matcher.ServerWebExch
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
-public class SecurityConfig {
+public class OldSecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean

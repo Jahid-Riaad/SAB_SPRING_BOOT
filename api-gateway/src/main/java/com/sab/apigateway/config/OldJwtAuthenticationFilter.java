@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @Component
-public class CustomGlobalFilter implements GlobalFilter {
+public class OldJwtAuthenticationFilter implements GlobalFilter {
     private final JwtTokenProvider jwtTokenProvider;
 
-    public CustomGlobalFilter(JwtTokenProvider jwtTokenProvider) {
+    public OldJwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
