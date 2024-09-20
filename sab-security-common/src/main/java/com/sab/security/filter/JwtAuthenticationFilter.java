@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final RestTemplate restTemplate;
 
     // Endpoint of auth-service to fetch user details
-    private final String userDetailsEndpoint = "http://localhost:8084/auth/user/";
+    private final String userDetailsEndpoint = "http://localhost:8084/user/auth/user/";
 
     public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, RestTemplate restTemplate) {
         this.jwtTokenProvider = jwtTokenProvider;

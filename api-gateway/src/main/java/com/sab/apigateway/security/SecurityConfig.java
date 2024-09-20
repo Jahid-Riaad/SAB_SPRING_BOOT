@@ -1,0 +1,50 @@
+package com.sab.apigateway.config;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.ReactiveAuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.header.ReferrerPolicyServerHttpHeadersWriter;
+import org.springframework.security.web.server.header.XFrameOptionsServerHttpHeadersWriter;
+import org.springframework.security.web.server.savedrequest.NoOpServerRequestCache;
+import org.springframework.security.web.server.util.matcher.NegatedServerWebExchangeMatcher;
+import org.springframework.security.web.server.util.matcher.OrServerWebExchangeMatcher;
+import reactor.core.publisher.Mono;
+
+import static org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers.pathMatchers;
+
+@Configuration
+@EnableWebFluxSecurity
+@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
+public class SecurityConfig {
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        return http
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)  // Disable CSRF for API Gateway
+                .authorizeExchange(exchange -> exchange
+                        .pathMatchers("api/public/**").permitAll()
+                        .pathMatchers("/user/auth/**").permitAll()
+                        .pathMatchers("api/**").authenticated()
+                )
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)  // Disable default basic auth
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)  // Disable form-based login
+                .addFilterAt(jwtAuthenticationFilter, SecurityWebFiltersOrder.AUTHENTICATION)  // Add JWT filter
+                .build();
+    }
+    @Bean
+    public ReactiveAuthenticationManager reactiveAuthenticationManager() {
+        // Custom AuthenticationManager to prevent default password generation
+        return authentication -> Mono.just(new UsernamePasswordAuthenticationToken(null, null, null));
+    }
+}
