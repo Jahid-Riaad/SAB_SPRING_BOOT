@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter implements WebFilter {
         // Use WebClient for reactive non-blocking call to auth-service
         return webClientBuilder.build()
                 .post()
-                .uri("http://user-service/auth/validate-token")
+                .uri("lb://user-service/user/auth/validate-token")
                 .bodyValue(token)
                 .retrieve()
                 .bodyToMono(UserDTO.class)

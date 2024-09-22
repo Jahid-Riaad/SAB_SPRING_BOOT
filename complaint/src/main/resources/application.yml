@@ -1,3 +1,3 @@
 jwt:
   secret: bc534cbde41272352d1a97ae10f0af9ea0df6eeec7e3bbded9d8d5647837c361
-  expiration: 300
+  expiration: 3000

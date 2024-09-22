@@ -22,13 +22,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 @EnableWebSecurity
 //@RequiredArgsConstructor(onConstructor_ = @__(@Autowired))
 public class SecurityConfig {
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
-    private  MvcRequestMatcher.Builder mvc;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter, MvcRequestMatcher.Builder mvc) {
-        this.jwtAuthenticationFilter = jwtAuthenticationFilter;
-        this.mvc = mvc;
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -45,7 +39,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter,   MvcRequestMatcher.Builder mvc) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(authorizeRequests ->

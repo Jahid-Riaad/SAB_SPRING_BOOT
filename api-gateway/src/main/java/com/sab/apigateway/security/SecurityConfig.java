@@ -22,13 +22,14 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
-    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)  // Disable CSRF for API Gateway
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("api/public/**").permitAll()
                         .pathMatchers("/user/auth/**").permitAll()
                         .pathMatchers("api/**").authenticated()
+                        .anyExchange().authenticated()
                 )
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)  // Disable default basic auth
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)  // Disable form-based login

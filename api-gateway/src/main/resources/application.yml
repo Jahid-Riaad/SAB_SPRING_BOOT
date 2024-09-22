@@ -1,4 +1,8 @@
-
+logging:
+    level:
+        root: warn
+        org.springframework.web: debug
+        org.hibernate: info
 spring:
   main:
     web-application-type: reactive
